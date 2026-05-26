@@ -1,4 +1,7 @@
 const express = require("express");
+const dotenv = require("dotenv/config")
+
+const {sequelize} = require("./models");
 
 const app = express();
 
@@ -16,7 +19,21 @@ app.get("/veiculos", (req, res)=>{
         cor: "Prata Sense"
     })
 })
+const PORT = process.env.PORT || 3000;
+console.log("Tentando conectar com o banco de dados.")
 
-app.listen(3000, ()=>{
-    console.log("Servidor Rodando em: http://localhost:3000")
+sequelize.sync().then(
+    ()=>{
+    app.listen(PORT, ()=>{
+        console.log(`Servidor Rodando em: http://localhost:${PORT}`)
+    })
+}).catch(err => {
+    console.log("Erro ao conectar: ", err)
 })
+
+
+/*
+npm install sequelize
+npm install mysql2
+npm install dotenv
+*/
