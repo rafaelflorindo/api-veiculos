@@ -1,6 +1,10 @@
+//faltou importar o database
+const sequelize = require("../config/database");
+
 const { DataTypes } = require("sequelize");
-module.exports = { sequelize, DataTypes}
-const Produto = sequelize.define('Produto',{
+
+//module.exports = { sequelize, DataTypes}
+const Veiculo = sequelize.define('Veiculo',{
     placa:{
         type: DataTypes.STRING,
         allowNull: false
@@ -30,4 +34,4 @@ const Produto = sequelize.define('Produto',{
         allowNull: false
     }
 })
-return Produto;
+module.exports = Veiculo;
